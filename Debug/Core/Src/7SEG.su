@@ -1,0 +1,4 @@
+7SEG.c:14:6:display7SEGvertical	16	static
+7SEG.c:132:6:display7SEGhorizontal	16	static
+7SEG.c:249:6:display7SEGBuffervertical	16	static
+7SEG.c:270:6:display7SEGBufferhorizontal	16	static

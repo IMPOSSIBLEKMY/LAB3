@@ -1,0 +1,14 @@
+software_timer.c:56:6:setTimerTest	16	static
+software_timer.c:62:6:setTimerENhorizontal	16	static
+software_timer.c:68:6:setTimerENvertical	16	static
+software_timer.c:75:6:setTimer7SEGCountRedhorizontal	16	static
+software_timer.c:81:6:setTimer7SEGCountYellowhorizontal	16	static
+software_timer.c:87:6:setTimer7SEGCountGreenhorizontal	16	static
+software_timer.c:94:6:setTimer7SEGCountRedvertical	16	static
+software_timer.c:100:6:setTimer7SEGCountYellowvertical	16	static
+software_timer.c:106:6:setTimer7SEGCountGreenvertical	16	static
+software_timer.c:113:6:setTimerAuto	16	static
+software_timer.c:120:6:setTimerBlinkingRed	16	static
+software_timer.c:126:6:setTimerBlinkingYellow	16	static
+software_timer.c:131:6:setTimerBlinkingGreen	16	static
+software_timer.c:136:6:timerRun	4	static

@@ -1,0 +1,359 @@
+/*
+ * fsm_manual.c
+ *
+ *  Created on: Nov 12, 2024
+ *      Author: NTKM
+ */
+
+#include "fsm_manual.h"
+
+int red_yellow_green_manual_time[3] = {0, 0, 0};
+
+int check_sync_red = 0;
+int check_sync_yellow = 0;
+int check_sync_green = 0;
+
+int check_button2_red = 0;
+int check_button2_yellow = 0;
+int check_button2_green = 0;
+
+void fsm_manual_all()
+{
+	change_to_manual_mode();
+
+	fsm_manual();
+
+}
+
+void change_to_manual_mode()
+{
+
+	if(isButton1Pressed() == 1 && status_horizontal < INIT_MANUAL && status_vertical < INIT_MANUAL)
+	{
+		status_horizontal = INIT_MANUAL;
+		status_vertical = INIT_MANUAL;
+	}
+
+}
+
+void fsm_manual()
+{
+	switch(status_horizontal)
+	{
+	case INIT_MANUAL:
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			red_yellow_green_manual_time[i] = red_yellow_green_auto_time_horizontal[i];
+		}
+
+		setTimerAuto(10000);
+		setTimerBlinkingRed(500);
+
+		check_button2_red = 0;
+		check_button2_yellow = 0;
+		check_button2_green = 0;
+
+		check_sync_red = 0;
+		check_sync_yellow = 0;
+		check_sync_green = 0;
+
+		num_horizontal = 1;
+		status_horizontal = MANUAL_RED;
+		break;
+	}
+	case MANUAL_RED:
+	{
+
+		if(check_sync_red == 0)
+		{
+			check_sync_red = 1;
+			HAL_GPIO_WritePin(yellow1_GPIO_Port, red1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(yellow2_GPIO_Port, red2_Pin, GPIO_PIN_SET);
+		}
+
+		if(timerBlinkingRed_flag == 1)
+		{
+			HAL_GPIO_TogglePin(red1_GPIO_Port, red1_Pin);
+			HAL_GPIO_TogglePin(red2_GPIO_Port, red2_Pin);
+
+			setTimerBlinkingRed(500);
+		}
+
+		HAL_GPIO_WritePin(yellow1_GPIO_Port, yellow1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(yellow2_GPIO_Port, yellow2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(green1_GPIO_Port, green1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(green2_GPIO_Port, green2_Pin, GPIO_PIN_RESET);
+
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[0] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[0] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 2;
+
+		if(timerAuto_flag == 1)
+		{
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+		}
+
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = MANUAL_YELLOW;
+			status_vertical = MANUAL_YELLOW;
+			setTimerAuto(10000);
+			setTimerBlinkingYellow(500);
+		}
+
+		if(isButton2Pressed() == 1)
+		{
+			check_button2_red = 1;
+
+			if(red_yellow_green_manual_time[0] <= 99 && red_yellow_green_manual_time[0] >= 1)
+			{
+				red_yellow_green_manual_time[0]++;
+			}
+			else
+			{
+				red_yellow_green_manual_time[0] = 1;
+			}
+			setTimerAuto(10000);
+		}
+
+		if(isButton3Pressed() == 1)
+		{
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+			timerAuto_flag = 0;
+		}
+
+		break;
+	}
+	case MANUAL_YELLOW:
+	{
+
+		if(check_sync_yellow == 0)
+		{
+			check_sync_yellow = 1;
+			HAL_GPIO_WritePin(yellow1_GPIO_Port, yellow1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(yellow2_GPIO_Port, yellow2_Pin, GPIO_PIN_SET);
+		}
+
+		if(timerBlinkingYellow_flag == 1)
+		{
+			HAL_GPIO_TogglePin(yellow1_GPIO_Port, yellow1_Pin);
+			HAL_GPIO_TogglePin(yellow2_GPIO_Port, yellow2_Pin);
+
+			setTimerBlinkingYellow(500);
+		}
+
+		HAL_GPIO_WritePin(red1_GPIO_Port, red1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(red2_GPIO_Port, red2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(green1_GPIO_Port, green1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(green2_GPIO_Port, green2_Pin, GPIO_PIN_RESET);
+
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[1] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[1] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 3;
+
+		if(timerAuto_flag == 1)
+		{
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+		}
+
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = MANUAL_GREEN;
+			status_vertical = MANUAL_GREEN;
+			setTimerAuto(10000);
+			setTimerBlinkingGreen(500);
+		}
+
+		if(isButton2Pressed() == 1)
+		{
+			check_button2_yellow = 1;
+
+			if(red_yellow_green_manual_time[1] <= 99 && red_yellow_green_manual_time[1] >= 1)
+			{
+				red_yellow_green_manual_time[1]++;
+			}
+			else
+			{
+				red_yellow_green_manual_time[1] = 1;
+			}
+			setTimerAuto(10000);
+		}
+
+		if(isButton3Pressed() == 1)
+		{
+			if(check_button2_red == 1 && check_button2_yellow == 1)
+			{
+				red_yellow_green_manual_time[2] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[1];
+
+				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				{
+					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
+					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
+
+					red_yellow_green_auto_time_horizontal[1] = red_yellow_green_manual_time[1];
+					red_yellow_green_auto_time_vertical[1] = red_yellow_green_manual_time[1];
+
+					red_yellow_green_auto_time_horizontal[2] = red_yellow_green_manual_time[2];
+					red_yellow_green_auto_time_vertical[2] = red_yellow_green_manual_time[2];
+				}
+
+			}
+
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+			timerAuto_flag = 0;
+		}
+
+		break;
+	}
+	case MANUAL_GREEN:
+	{
+
+		if(check_sync_green == 0)
+		{
+			check_sync_green = 1;
+			HAL_GPIO_WritePin(green1_GPIO_Port, green1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(green2_GPIO_Port, green2_Pin, GPIO_PIN_SET);
+		}
+
+		if(timerBlinkingGreen_flag == 1)
+		{
+			HAL_GPIO_TogglePin(green1_GPIO_Port, green1_Pin);
+			HAL_GPIO_TogglePin(green2_GPIO_Port, green2_Pin);
+
+			setTimerBlinkingGreen(500);
+		}
+
+		HAL_GPIO_WritePin(red1_GPIO_Port, red1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(red2_GPIO_Port, red2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(yellow1_GPIO_Port, yellow1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(yellow2_GPIO_Port, yellow2_Pin, GPIO_PIN_RESET);
+
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[2] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[2] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 4;
+
+		if(timerAuto_flag == 1)
+		{
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+		}
+
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+		}
+
+		if(isButton2Pressed() == 1)
+		{
+			check_button2_green = 1;
+
+			if(red_yellow_green_manual_time[2] <= 99 && red_yellow_green_manual_time[2] >= 1)
+			{
+				red_yellow_green_manual_time[2]++;
+			}
+			else
+			{
+				red_yellow_green_manual_time[2] = 1;
+			}
+			setTimerAuto(10000);
+		}
+
+		if(isButton3Pressed() == 1)
+		{
+			if(check_button2_red == 1 && check_button2_yellow == 1)
+			{
+				red_yellow_green_manual_time[2] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[1];
+
+				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				{
+					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
+					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
+
+					red_yellow_green_auto_time_horizontal[1] = red_yellow_green_manual_time[1];
+					red_yellow_green_auto_time_vertical[1] = red_yellow_green_manual_time[1];
+
+					red_yellow_green_auto_time_horizontal[2] = red_yellow_green_manual_time[2];
+					red_yellow_green_auto_time_vertical[2] = red_yellow_green_manual_time[2];
+				}
+
+			}
+			else if(check_button2_red == 1 && check_button2_green == 1)
+			{
+				red_yellow_green_manual_time[1] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[2];
+
+				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				{
+					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
+					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
+
+					red_yellow_green_auto_time_horizontal[1] = red_yellow_green_manual_time[1];
+					red_yellow_green_auto_time_vertical[1] = red_yellow_green_manual_time[1];
+
+					red_yellow_green_auto_time_horizontal[2] = red_yellow_green_manual_time[2];
+					red_yellow_green_auto_time_vertical[2] = red_yellow_green_manual_time[2];
+				}
+
+			}
+			else if(check_button2_yellow == 1 && check_button2_green == 1)
+			{
+				red_yellow_green_manual_time[0] = red_yellow_green_manual_time[1] + red_yellow_green_manual_time[2];
+
+				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				{
+					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
+					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
+
+					red_yellow_green_auto_time_horizontal[1] = red_yellow_green_manual_time[1];
+					red_yellow_green_auto_time_vertical[1] = red_yellow_green_manual_time[1];
+
+					red_yellow_green_auto_time_horizontal[2] = red_yellow_green_manual_time[2];
+					red_yellow_green_auto_time_vertical[2] = red_yellow_green_manual_time[2];
+				}
+
+			}
+			else if(check_button2_red == 1 && check_button2_yellow == 1 && check_button2_green == 1)
+			{
+
+				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0]
+				&& red_yellow_green_manual_time[0] == red_yellow_green_manual_time[1] + red_yellow_green_manual_time[2])
+				{
+					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
+					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
+
+					red_yellow_green_auto_time_horizontal[1] = red_yellow_green_manual_time[1];
+					red_yellow_green_auto_time_vertical[1] = red_yellow_green_manual_time[1];
+
+					red_yellow_green_auto_time_horizontal[2] = red_yellow_green_manual_time[2];
+					red_yellow_green_auto_time_vertical[2] = red_yellow_green_manual_time[2];
+				}
+
+			}
+
+			status_horizontal = INIT_AUTO;
+			status_vertical = INIT_AUTO;
+			timerAuto_flag = 0;
+		}
+
+		break;
+	}
+
+	}
+
+}
