@@ -35,7 +35,7 @@ extern int status_vertical;
 extern int num_horizontal;
 extern int num_vertical;
 
-void fsm_auto_all();
+void fsm_automatic();
 
 void fsm_auto_horizontal();
 void fsm_auto_vertical();

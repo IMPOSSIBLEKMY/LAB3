@@ -24,12 +24,8 @@ extern int check_button2_red;
 extern int check_button2_yellow;
 extern int check_button2_green;
 
-void fsm_manual_all();
-
-void change_to_manual_mode();
-
 void fsm_manual();
 
-extern int red_yellow_green_manual_time[3];
+void fsm_setting();
 
 #endif /* INC_FSM_MANUAL_H_ */

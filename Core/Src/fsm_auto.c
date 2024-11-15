@@ -19,7 +19,7 @@ int status_vertical = INIT_AUTO;
 int num_horizontal = 1;
 int num_vertical = 1;
 
-void fsm_auto_all()
+void fsm_automatic()
 {
 	fsm_auto_horizontal();
 
