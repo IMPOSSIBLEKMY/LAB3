@@ -111,9 +111,9 @@ int main(void)
 		  setTimerTest(1000);
 	  }
 
-	  fsm_manual();
-
 	  fsm_automatic();
+
+	  fsm_manual();
 
 	  fsm_setting();
 

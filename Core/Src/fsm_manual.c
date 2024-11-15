@@ -20,14 +20,44 @@ int check_button2_green = 0;
 void fsm_setting()
 {
 
-	if(isButton1Pressed() == 1 && status_horizontal < INIT_MANUAL && status_vertical < INIT_MANUAL)
-	{
-		status_horizontal = INIT_MANUAL;
-		status_vertical = INIT_MANUAL;
-	}
-
 	switch(status_horizontal)
 	{
+	case INIT_AUTO:
+	{
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = INIT_MANUAL;
+			status_vertical = INIT_MANUAL;
+		}
+		break;
+	}
+	case AUTO_RED:
+	{
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = INIT_MANUAL;
+			status_vertical = INIT_MANUAL;
+		}
+		break;
+	}
+	case AUTO_YELLOW:
+	{
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = INIT_MANUAL;
+			status_vertical = INIT_MANUAL;
+		}
+		break;
+	}
+	case AUTO_GREEN:
+	{
+		if(isButton1Pressed() == 1)
+		{
+			status_horizontal = INIT_MANUAL;
+			status_vertical = INIT_MANUAL;
+		}
+		break;
+	}
 	case MANUAL_RED:
 	{
 		if(isButton1Pressed() == 1)
