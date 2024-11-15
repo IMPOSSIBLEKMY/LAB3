@@ -132,18 +132,6 @@ void fsm_auto_horizontal()
 
 void fsm_auto_vertical()
 {
-	if(timerENvertical_flag == 1)
-	{
-		if(num_vertical > 1)
-		{
-			num_vertical = 0;
-		}
-
-		display7SEGBuffervertical(num_vertical);
-
-		num_vertical++;
-		setTimerENvertical(500);
-	}
 
 	switch(status_vertical)
 	{
@@ -233,4 +221,16 @@ void fsm_auto_vertical()
 	}
 	}
 
+	if(timerENvertical_flag == 1)
+	{
+		if(num_vertical > 1)
+		{
+			num_vertical = 0;
+		}
+
+		display7SEGBuffervertical(num_vertical);
+
+		num_vertical++;
+		setTimerENvertical(500);
+	}
 }
