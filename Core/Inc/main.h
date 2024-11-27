@@ -70,9 +70,11 @@ void Error_Handler(void);
 #define a1_GPIO_Port GPIOA
 #define b1_Pin GPIO_PIN_7
 #define b1_GPIO_Port GPIOA
-#define EN0_Pin GPIO_PIN_0
+#define button4_Pin GPIO_PIN_0
+#define button4_GPIO_Port GPIOB
+#define EN0_Pin GPIO_PIN_1
 #define EN0_GPIO_Port GPIOB
-#define EN1_Pin GPIO_PIN_1
+#define EN1_Pin GPIO_PIN_2
 #define EN1_GPIO_Port GPIOB
 #define e2_Pin GPIO_PIN_10
 #define e2_GPIO_Port GPIOB

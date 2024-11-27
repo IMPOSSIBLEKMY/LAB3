@@ -19,11 +19,13 @@ int isButton2Pressed();
 
 int isButton3Pressed();
 
+int isButton4Pressed();
+
 void getButton1();
 
 void getButton2();
 
 void getButton3();
 
-
+void getButton4();
 #endif /* INC_BUTTON_H_ */

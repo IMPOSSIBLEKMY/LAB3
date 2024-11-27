@@ -24,6 +24,10 @@ extern int check_button2_red;
 extern int check_button2_yellow;
 extern int check_button2_green;
 
+extern int check_button3_red;
+extern int check_button3_yellow;
+extern int check_button3_green;
+
 void fsm_manual();
 
 void fsm_setting();

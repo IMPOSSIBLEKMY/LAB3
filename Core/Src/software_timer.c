@@ -43,14 +43,8 @@ int timerAuto_flag = 0;
 int timerAuto_counter = 0;
 
 
-int timerBlinkingRed_flag = 0;
-int timerBlinkingRed_counter = 0;
-
-int timerBlinkingYellow_flag = 0;
-int timerBlinkingYellow_counter = 0;
-
-int timerBlinkingGreen_flag = 0;
-int timerBlinkingGreen_counter = 0;
+int timerBlinking_flag = 0;
+int timerBlinking_counter = 0;
 
 
 void setTimerTest(int duration)
@@ -117,21 +111,12 @@ void setTimerAuto(int duration)
 }
 
 
-void setTimerBlinkingRed(int duration)
+void setTimerBlinking(int duration)
 {
-	timerBlinkingRed_counter = duration / TIMER_CYCLE;
-	timerBlinkingRed_flag = 0;
+	timerBlinking_counter = duration / TIMER_CYCLE;
+	timerBlinking_flag = 0;
 }
 
-void setTimerBlinkingYellow(int duration) {
-    timerBlinkingYellow_counter = duration / TIMER_CYCLE;
-    timerBlinkingYellow_flag = 0;
-}
-
-void setTimerBlinkingGreen(int duration) {
-    timerBlinkingGreen_counter = duration / TIMER_CYCLE;
-    timerBlinkingGreen_flag = 0;
-}
 
 void timerRun()
 {
@@ -229,29 +214,14 @@ void timerRun()
         }
     }
 
-    if (timerBlinkingRed_counter > 0)
+
+    if (timerBlinking_counter > 0)
     {
-    	timerBlinkingRed_counter--;
-    	if (timerBlinkingRed_counter <= 0)
+    	timerBlinking_counter--;
+    	if (timerBlinking_counter <= 0)
     	{
-    		timerBlinkingRed_flag = 1;
+    		timerBlinking_flag = 1;
     	}
-    }
-    if (timerBlinkingYellow_counter > 0)
-    {
-        timerBlinkingYellow_counter--;
-        if (timerBlinkingYellow_counter <= 0)
-        {
-            timerBlinkingYellow_flag = 1;
-        }
-    }
-    if (timerBlinkingGreen_counter > 0)
-    {
-        timerBlinkingGreen_counter--;
-        if (timerBlinkingGreen_counter <= 0)
-        {
-            timerBlinkingGreen_flag = 1;
-        }
     }
 }
 

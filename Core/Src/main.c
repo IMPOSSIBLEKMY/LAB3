@@ -239,6 +239,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : button4_Pin */
+  GPIO_InitStruct.Pin = button4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(button4_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : EN0_Pin EN1_Pin e2_Pin f2_Pin
                            g2_Pin red2_Pin yellow2_Pin green2_Pin
                            EN2_Pin EN3_Pin a2_Pin b2_Pin
@@ -267,6 +273,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	getButton1();
 	getButton2();
 	getButton3();
+	getButton4();
 }
 /* USER CODE END 4 */
 

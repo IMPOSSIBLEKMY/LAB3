@@ -23,9 +23,7 @@ extern int timer7SEGCountGreenvertical_flag;
 
 extern int timerAuto_flag;
 
-extern int timerBlinkingRed_flag;
-extern int timerBlinkingYellow_flag;
-extern int timerBlinkingGreen_flag;
+extern int timerBlinking_flag;
 
 void setTimerTest(int duration);
 
@@ -42,9 +40,7 @@ void setTimer7SEGCountGreenvertical(int duration);
 
 void setTimerAuto(int duration);
 
-void setTimerBlinkingRed(int duration);
-void setTimerBlinkingYellow(int duration);
-void setTimerBlinkingGreen(int duration);
+void setTimerBlinking(int duration);
 
 void timerRun();
 
