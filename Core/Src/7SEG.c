@@ -11,6 +11,16 @@ int buffer_7SEG_vertical[2] = {0, 0};
 
 int buffer_7SEG_horizontal[2] = {0, 0};
 
+int EN_horizontal = 1;
+int EN_vertical = 1;
+
+void display7SEGFinal()
+{
+	display7SEGFinalhorizontal();
+
+	display7SEGFinalvertical();
+}
+
 void display7SEGvertical(int num)
 {
 	switch(num)
@@ -287,3 +297,38 @@ void display7SEGBufferhorizontal(int num)
 	}
 	}
 }
+
+void display7SEGFinalvertical()
+{
+
+	if(timerENvertical_flag == 1)
+	{
+		if(EN_vertical > 1)
+		{
+			EN_vertical = 0;
+		}
+
+		display7SEGBuffervertical(EN_vertical);
+
+		EN_vertical++;
+		setTimerENvertical(500);
+	}
+}
+
+void display7SEGFinalhorizontal()
+{
+
+	if(timerENhorizontal_flag == 1)
+	{
+		if(EN_horizontal > 1)
+		{
+			EN_horizontal = 0;
+		}
+
+		display7SEGBufferhorizontal(EN_horizontal);
+
+		EN_horizontal++;
+		setTimerENhorizontal(500);
+	}
+}
+

@@ -17,10 +17,18 @@
 extern int buffer_7SEG_vertical[2];
 extern int buffer_7SEG_horizontal[2];
 
+extern int EN_horizontal;
+extern int EN_vertical;
+
+void display7SEGFinal();
+
 void display7SEGvertical(int num);
 void display7SEGhorizontal(int num);
 
 void display7SEGBuffervertical(int num);
 void display7SEGBufferhorizontal(int num);
+
+void display7SEGFinalvertical();
+void display7SEGFinalhorizontal();
 
 #endif /* INC_7SEG_H_ */
