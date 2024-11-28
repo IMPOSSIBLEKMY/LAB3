@@ -24,8 +24,10 @@
 #define MANUAL_GREEN 7
 
 extern int red_yellow_green_auto_time_vertical[3];
+extern int temp_red_yellow_green_auto_time_vertical[3];
 
 extern int red_yellow_green_auto_time_horizontal[3];
+extern int temp_red_yellow_green_auto_time_horizontal[3];
 
 extern int status_horizontal;
 extern int status_vertical;

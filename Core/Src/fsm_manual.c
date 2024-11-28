@@ -354,12 +354,6 @@ void fsm_manual()
 		HAL_GPIO_WritePin(green1_GPIO_Port, green1_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(green2_GPIO_Port, green2_Pin, GPIO_PIN_RESET);
 
-		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[0] / 10;
-		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[0] % 10;
-
-		buffer_7SEG_vertical[0] = 0;
-		buffer_7SEG_vertical[1] = 2;
-
 		if(timerAuto_flag == 1)
 		{
 			status_horizontal = INIT_AUTO;
@@ -391,12 +385,6 @@ void fsm_manual()
 		HAL_GPIO_WritePin(green1_GPIO_Port, green1_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(green2_GPIO_Port, green2_Pin, GPIO_PIN_RESET);
 
-		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[1] / 10;
-		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[1] % 10;
-
-		buffer_7SEG_vertical[0] = 0;
-		buffer_7SEG_vertical[1] = 3;
-
 		if(timerAuto_flag == 1)
 		{
 			status_horizontal = INIT_AUTO;
@@ -427,12 +415,6 @@ void fsm_manual()
 		HAL_GPIO_WritePin(red2_GPIO_Port, red2_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(yellow1_GPIO_Port, yellow1_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(yellow2_GPIO_Port, yellow2_Pin, GPIO_PIN_RESET);
-
-		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[2] / 10;
-		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[2] % 10;
-
-		buffer_7SEG_vertical[0] = 0;
-		buffer_7SEG_vertical[1] = 4;
 
 		if(timerAuto_flag == 1)
 		{

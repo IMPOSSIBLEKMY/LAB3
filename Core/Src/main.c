@@ -113,11 +113,11 @@ int main(void)
 
 	  fsm_setting();
 
+	  display7SEGFinal();
+
 	  fsm_manual();
 
 	  fsm_automatic();
-
-	  display7SEGFinal();
 
     /* USER CODE END WHILE */
 

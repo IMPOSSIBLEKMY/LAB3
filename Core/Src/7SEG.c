@@ -300,6 +300,27 @@ void display7SEGBufferhorizontal(int num)
 
 void display7SEGFinalvertical()
 {
+	switch(status_vertical)
+	{
+	case AUTO_RED:
+	{
+		buffer_7SEG_vertical[0] = temp_red_yellow_green_auto_time_vertical[0] / 10;
+		buffer_7SEG_vertical[1] = temp_red_yellow_green_auto_time_vertical[0] % 10;
+		break;
+	}
+	case AUTO_YELLOW:
+	{
+		buffer_7SEG_vertical[0] = temp_red_yellow_green_auto_time_vertical[1] / 10;
+		buffer_7SEG_vertical[1] = temp_red_yellow_green_auto_time_vertical[1] % 10;
+		break;
+	}
+	case AUTO_GREEN:
+	{
+		buffer_7SEG_vertical[0] = temp_red_yellow_green_auto_time_vertical[2] / 10;
+		buffer_7SEG_vertical[1] = temp_red_yellow_green_auto_time_vertical[2] % 10;
+		break;
+	}
+	}
 
 	if(timerENvertical_flag == 1)
 	{
@@ -317,6 +338,54 @@ void display7SEGFinalvertical()
 
 void display7SEGFinalhorizontal()
 {
+	switch(status_horizontal)
+	{
+	case AUTO_RED:
+	{
+		buffer_7SEG_horizontal[0] = temp_red_yellow_green_auto_time_horizontal[0] / 10;
+		buffer_7SEG_horizontal[1] = temp_red_yellow_green_auto_time_horizontal[0] % 10;
+		break;
+	}
+	case AUTO_YELLOW:
+	{
+		buffer_7SEG_horizontal[0] = temp_red_yellow_green_auto_time_horizontal[1] / 10;
+		buffer_7SEG_horizontal[1] = temp_red_yellow_green_auto_time_horizontal[1] % 10;
+		break;
+	}
+	case AUTO_GREEN:
+	{
+		buffer_7SEG_horizontal[0] = temp_red_yellow_green_auto_time_horizontal[2] / 10;
+		buffer_7SEG_horizontal[1] = temp_red_yellow_green_auto_time_horizontal[2] % 10;
+		break;
+	}
+	case MANUAL_RED:
+	{
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[0] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[0] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 2;
+		break;
+	}
+	case MANUAL_YELLOW:
+	{
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[1] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[1] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 3;
+		break;
+	}
+	case MANUAL_GREEN:
+	{
+		buffer_7SEG_horizontal[0] = red_yellow_green_manual_time[2] / 10;
+		buffer_7SEG_horizontal[1] = red_yellow_green_manual_time[2] % 10;
+
+		buffer_7SEG_vertical[0] = 0;
+		buffer_7SEG_vertical[1] = 4;
+		break;
+	}
+	}
 
 	if(timerENhorizontal_flag == 1)
 	{
