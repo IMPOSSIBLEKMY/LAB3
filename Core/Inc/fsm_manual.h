@@ -18,6 +18,4 @@ extern int red_yellow_green_manual_time[3];
 
 void fsm_manual();
 
-void fsm_setting();
-
 #endif /* INC_FSM_MANUAL_H_ */

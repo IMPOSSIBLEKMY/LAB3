@@ -99,6 +99,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimerTest(1000);
+  setTimer7SEGCountHorizontal(1000);
+  setTimer7SEGCountVertical(1000);
   setTimerENhorizontal(500);
   setTimerENvertical(500);
 
@@ -110,8 +112,6 @@ int main(void)
 
 		  setTimerTest(1000);
 	  }
-
-	  fsm_setting();
 
 	  display7SEGFinal();
 
