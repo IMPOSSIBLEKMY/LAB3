@@ -113,11 +113,11 @@ int main(void)
 		  setTimerTest(1000);
 	  }
 
-	  display7SEGFinal();
-
 	  fsm_manual();
 
 	  fsm_automatic();
+
+	  display7SEGFinal();
 
     /* USER CODE END WHILE */
 

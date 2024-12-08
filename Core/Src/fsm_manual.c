@@ -175,17 +175,27 @@ void fsm_manual()
 
 		if(isButton4Pressed() == 1)
 		{
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
+			setTimerENhorizontal(500);
+			setTimerENvertical(500);
 			timerAuto_flag = 0;
 		}
 
 		if(timerAuto_flag == 1)
 		{
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 		}
@@ -259,8 +269,8 @@ void fsm_manual()
 			{
 				red_yellow_green_manual_time[2] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[1];
 
-				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
-				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				if(red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[0])
 				{
 					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
 					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
@@ -274,17 +284,25 @@ void fsm_manual()
 
 			}
 
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 			timerAuto_flag = 0;
 		}
 
 		if(timerAuto_flag == 1)
 		{
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 		}
@@ -318,6 +336,12 @@ void fsm_manual()
 		{
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
+			horizontal_counter = 0;
+			vertical_counter = 0;
+			EN_horizontal = 1;
+			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 		}
 
 		if(isButton2Pressed() == 1)
@@ -356,8 +380,8 @@ void fsm_manual()
 			{
 				red_yellow_green_manual_time[2] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[1];
 
-				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
-				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				if(red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[0])
 				{
 					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
 					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
@@ -374,8 +398,8 @@ void fsm_manual()
 			{
 				red_yellow_green_manual_time[1] = red_yellow_green_manual_time[0] - red_yellow_green_manual_time[2];
 
-				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
-				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				if(red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[0])
 				{
 					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
 					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
@@ -392,8 +416,8 @@ void fsm_manual()
 			{
 				red_yellow_green_manual_time[0] = red_yellow_green_manual_time[1] + red_yellow_green_manual_time[2];
 
-				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
-				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0])
+				if(red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[0])
 				{
 					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
 					red_yellow_green_auto_time_vertical[0] = red_yellow_green_manual_time[0];
@@ -409,8 +433,8 @@ void fsm_manual()
 			else if((check_button2_red == 1 || check_button3_red == 1) && (check_button2_yellow == 1 || check_button3_yellow == 1) && (check_button2_green == 1 || check_button3_green == 1))
 			{
 
-				if(red_yellow_green_manual_time[1] < red_yellow_green_manual_time[2]
-				&& red_yellow_green_manual_time[1] < red_yellow_green_manual_time[0]
+				if(red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[2]
+				&& red_yellow_green_manual_time[1] <= red_yellow_green_manual_time[0]
 				&& red_yellow_green_manual_time[0] == red_yellow_green_manual_time[1] + red_yellow_green_manual_time[2])
 				{
 					red_yellow_green_auto_time_horizontal[0] = red_yellow_green_manual_time[0];
@@ -425,17 +449,25 @@ void fsm_manual()
 
 			}
 
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 			timerAuto_flag = 0;
 		}
 
 		if(timerAuto_flag == 1)
 		{
+			horizontal_counter = 0;
+			vertical_counter = 0;
 			EN_horizontal = 1;
 			EN_vertical = 1;
+			setTimer7SEGCountHorizontal(1000);
+			setTimer7SEGCountVertical(1000);
 			status_horizontal = AUTO_RED;
 			status_vertical = AUTO_GREEN;
 		}
